@@ -4,18 +4,20 @@
 <meta charset="UTF-8">
   <link href="techcss.css" rel="stylesheet" type="text/css">
 <nav id="navbar">
-  <header>Machine Learning RF Rover</header>
+
+  <header>RF Rover</header>
+
   <ul>
-    <li><a class="nav-link" href="#Vehicle_Subsystem_Report">Vehicle Subsystem Report</a></li>
+    <li><a class="nav-link" href="#Vehicle_Subsystem">Vehicle Subsystem</a></li>
     <li>
-      <a class="nav-link" href="#RF_Subsystem_Report">RF Subsytem Report</a>
+      <a class="nav-link" href="#RF_Subsystem">RF Subsystem</a>
     </li>
     <li>
-      <a class="nav-link" href="#Database_Subsystem_Report">Database Subsytem Report</a>
+      <a class="nav-link" href="#Database_Subsystem">Database Subsystem</a>
     </li>
-    <li><a class="nav-link" href="#Machine_Learning_Algorithm_Subsystem_Report">Machine Learning
-        Subsystem Report</a></li>
-    <li><a class="nav-link" href="#System_Description_and_Development">System System Description and
+    <li><a class="nav-link" href="#Machine_Learning_Algorithm_Subsystem">Machine Learning Algorithm
+        Subsystem</a></li>
+    <li><a class="nav-link" href="#System_Description_and_Development">System Description and
         Development</a></li>
     <li>
   </ul>
@@ -24,8 +26,9 @@
 <html>
 
 <main id="main-doc">
-  <section class="main-section" id="Vehicle_Subsystem_Report">
-    <h1>Vehicle Subsystem</h1>
+
+  <section class="main-section" id="Vehicle_Subsystem">
+    <header>Vehicle Subsystem</header>
     <article>
       <h2>Vehicle Subsystem Report Overview</h2>
 
@@ -36,7 +39,7 @@
         to the Pixhawk.
       </p>
       <h3 style="font-weight: bold;">Development Plan and Execution</h3>
-      <h4> Plan </h4>
+      <li><h4> Plan </h4></li>
       <p>
         The communication over the server between the RPI and the Pixhawk is done using
         MAVLink protocol to address the different components and motors connected to the Pixhawk.
@@ -45,7 +48,7 @@
         GPS signal or open loop commands from an RC remote, we spoofed the pixhawk into thinking it was receiving
         movement commands from an RC signal via a bitmask.
       </p>
-      <h4> Execution </h4>
+      <li><h4> Execution </h4></li>
 
       <p> Initially, this system was validated through testing on the Ardupilot SITL simulator. This simulator
         substitutes the pixhawk microcontroller and vehicle together. The SITL simulation can receive commands
@@ -60,10 +63,10 @@
         When the rover arrived at the position all led lights would turn off.
       </p>
 
-      <iframe src="https://drive.google.com/file/d/1u3ZwkBfu2k9tiIp2tU5eEeXzOgf1VP6O/preview" alt="Rover used for project" width="640" height="480"></iframe>
-      <iframe src="https://drive.google.com/file/d/1PUabUZCx4JA41EK6qsiU_nzpUi6S3qke/preview" width="640" height="480"></iframe>
+    <code>  <iframe src="https://drive.google.com/file/d/1u3ZwkBfu2k9tiIp2tU5eEeXzOgf1VP6O/preview" alt="Rover used for project" width="640" height="480"></iframe>
+      <iframe src="https://drive.google.com/file/d/1PUabUZCx4JA41EK6qsiU_nzpUi6S3qke/preview" width="640" height="480" ></iframe> </code>
 
-      <h4> Subsystem Conclusion </h4>
+    <li>  <h4> Subsystem Conclusion </h4> </li>
 
       <p> Using the SITL simulator and allowing the ultrasonic system to simulate the WiFi base stations and MLA commands showed the vehicle subsystem is functioning properly.
         However, we encountered trouble with the motors moving forward in a straight line since the the motors on the rover had no hall sensors or encoders to allow for
@@ -73,8 +76,8 @@
     </article>
   </section>
 
-  <section class="main-section" id="RF_Subsystem_Report">
-    <h1>RF Subsystem</h1>
+  <section class="main-section" id="RF_Subsystem">
+    <header>RF Subsystem</header>
     <article>
       <h2>RF Subsystem Report Overview</h2>
 
@@ -83,7 +86,7 @@
         Tshark, python script, and the RP3. The subsystem was tested to validate that it could
         perform all the functions stated above in the ConOPs, ICD, and FSR.</p>
 
-      <h3>Plan</h3>
+    <li>  <h3>Plan</h3>  </li>
 
       <p>For this subsystem, the main purpose was to be able to effectively collect RSSI signals
         so that the rest of the system can function. In order to do this the first step was to be able
@@ -96,7 +99,7 @@
         different configurations indoors and outdoors, and compared the data. This was an important
         step to ensure we would get the best results.</p>
 
-      <h3>Execution</h3>
+    <li>  <h3>Execution</h3> </li>
 
       <p>The ability to collect at least 5 data points was validated by running our python script
         that ran using Tshark. The script was programmed to collect 5000 packets and sort and save
@@ -108,11 +111,11 @@
         running the python script and observing the data. The three antennas tested were able to
         enable monitor mode and collected the needed signals.</p>
 
-      <iframe src="https://drive.google.com/file/d/1Qk807JznDoThCSKYlqdgQjkuIwKLptE2/preview" alt="RF data" width="640" height="480"></iframe>
-      <iframe src="https://drive.google.com/file/d/1KJ_TGl3mBsR753vMIzaAnkMY8q-5M1yj/preview" alt="RF data 2" width="640" height="480"></iframe>
+    <code>  <iframe src="https://drive.google.com/file/d/1Qk807JznDoThCSKYlqdgQjkuIwKLptE2/preview" alt="RF data" width="640" height="480"></iframe>
+      <iframe src="https://drive.google.com/file/d/1KJ_TGl3mBsR753vMIzaAnkMY8q-5M1yj/preview" alt="RF data 2" width="640" height="480"></iframe> </code>
 
 
-      <h3> Subsystem Conclusion </h3>
+  <li>    <h3> Subsystem Conclusion </h3>  </li>
 
       <p>There were many challenges with this subsystem that were not foreseen at the start of the
         project. The primary challenge was to be able to use an antenna to see RSSI data from the
@@ -141,8 +144,8 @@
   </section>
 
 
-  <section class="main-section" id="Database_Subsystem_Report">
-    <h1>Database Subsytem Report</h1>
+  <section class="main-section" id="Database_Subsystem">
+    <header>Database Subsystem</header>
     <article>
       <h2>Database Subsystem Report Overview</h2>
 
@@ -151,12 +154,12 @@
 
       <h2>Development Plan and Execution</h2>
 
-      <h3>Plan</h3>
+    <li>  <h3>Plan</h3>  </li>
 
       <p> In order to use the least amount of memory on the data collection subsystem, I planned to establish a cloud based SQL database. This cloud based database was determined to store collected data and provide access of data to algorithm in a
         response time of less than one second via a internet connection. The data to be stored and accessed is the Address and RSSI information of collected Wifi Access Point network packets. </p>
 
-      <h3> Execution </h3>
+  <li>    <h3> Execution </h3>  </li>
 
 
       <p>The data collected by rover is stored in a MySQL database hosted by the Google Cloud Platform. The data collected to be stored in database is transmitted by a Raspberry Pi 3 using a Proxy to give the quickest response time. The Raspberry Pi
@@ -170,9 +173,9 @@
       <p> The database gives accessibility of the data to the Algorithm via a separate Proxy, installed on computer hosting the Algorithm. Since Algorithm is written in Python, the same PyMySQL module is used for credentials and SQL data extraction.
       </p>
 
-      <iframe src="https://drive.google.com/file/d/12Cg167JgfL5JtwxrOU7VrGm8OpX5Pd-p/preview" alt="database figure 1" width="640" height="480"></iframe>
+    <code>  <iframe src="https://drive.google.com/file/d/12Cg167JgfL5JtwxrOU7VrGm8OpX5Pd-p/preview" alt="database figure 1" width="640" height="480"></iframe> </code>
 
-      <h3> Conclusion </h3>
+ <li>      <h3> Conclusion </h3>  </li>
 
       <p> The Database Subsystem successfully integrated with the RF and Algorithm Subsystem, storing collected data and making data accessible through a cloud based database. The average total response time of 50-55 ms was far quicker than required
         response time. The key decision made was to access MySQL database using a proxy and a local variable credential key that shorted response time by 400% versus the previous method of authorizing an IP address. I would highly recommend using the
@@ -181,8 +184,8 @@
     </article>
   </section>
 
-  <section class="main-section" id="Machine_Learning_Algorithm_Subsystem_Report">
-    <h1>Machine Learning Subsystem</h1>
+  <section class="main-section" id="Machine_Learning_Algorithm_Subsystem">
+    <header>Machine Learning Algorithm Subsystem</header>
     <article>
       <h2>Machine Learning Algorithm Subsytem Overview</h2>
 
@@ -191,23 +194,23 @@
 
       <h2> Development and Execution </h2>
 
-      <h3> Plan </h3>
+    <li>  <h3> Plan </h3>  </li>
 
       <p> A KNN algorithm was used to determine the pattern of the relative position and RSSI data. A categorical algorithm as opposed to linear regression because data was only collected at 10 linear points in an area. In this project we compared
         the data points to the 4 nearest neighbors from the training set.</p>
 
-      <h3> Execution </h3>
+  <li>    <h3> Execution </h3>  </li>
 
       <p> This system was tested by placing four wifi base stations in an area to send signals to the rover. Upon importing the data the algorithm would assign it to be the testing set and compare it to a predefined training set that was stored on
         the RPI. This CSV was compared to the training set line by line to output the median predicted position so that the rover could make decisions based on this reference. A series of test were conducted prior to the final design to get an
         accuracy high enough to validate the design requirements, because the algorithm can not compute accuracy without having position defined in the testing. Upon running and compiling the code a testing error of 13% was recorded for the K nearest
         neighbors approach, achieving the specified engineering specification.</p>
 
-      <iframe src="https://drive.google.com/file/d/1n346VF3w0xN3VoUotJxHwZ7bUNK1uPV1/preview" alt="ML1" width="640" height="480"></iframe>
+  <code>    <iframe src="https://drive.google.com/file/d/1n346VF3w0xN3VoUotJxHwZ7bUNK1uPV1/preview" alt="ML1" width="640" height="480"></iframe>
       <iframe src="https://drive.google.com/file/d/1OnzzJ96WN-iDQ--1ThHxb48oL-EF5cOk/preview" alt="ML2" width="640" height="480"></iframe>
-      <iframe src="https://drive.google.com/file/d/1zxjqh6T8vcJAbNy_dgmNX6iv9HUWrjwk/preview" alt="ML3" width="640" height="480"></iframe>
+      <iframe src="https://drive.google.com/file/d/1zxjqh6T8vcJAbNy_dgmNX6iv9HUWrjwk/preview" alt="ML3" width="640" height="480"></iframe> </code>
 
-      <h3>Conclusion </h3>
+  <li>    <h3>Conclusion </h3>   </li>
 
       <p> Testing and refining has been completed. The KNN algorithm has been placed inside a user defined algorithm that will import a predefined training set and then take in each relative position set as a testing set to compare with the training
         set. When the algorithm outputs a predicted position that is not equal to the final position the rover will move forward or backward and recursively call the algorithm again until it reaches the final position. </p>
@@ -218,12 +221,12 @@
   </section>
 
   <section class="main-section" id="System_Description_and_Development">
-    <h1>System Description and Development </h1>
+    <header>System Description and Development </header>
     <article>
 
       <h2> RF Rover subsystem report </h2>
 
-      <h3> Overview / Abstract </h3>
+     <h3> Overview / Abstract </h3>
 
           <p> The RF rover will autonomously collect 2.4GHz/5GHz signals from Wifi Access Points as it moves along a straight path. The Rover will autonomously collect the signals network packets and determine the Address of the Wifi Access Point
             that transmitted the signal, as well as the RSSI of the signal. The collected data is then sent to a database to be evaluated by a Machine Learning Algorithm that will determine the Rover’s location based on previous collected training
@@ -231,9 +234,9 @@
             work in unison to accomplish this is the Rover Vehicle Subsystem, the RF Collection Subsystem, the Database Subsystem, and the Machine Learning Algorithm Subsystem. </p>
 
 
-          <h3> Development Plan and Execution </h3>
+         <h3> Development Plan and Execution </h3>
 
-          <h4> Plan </h4>
+    <li>      <h4> Plan </h4>   </li>
 
           <p> In order to test the entire system and see if it can correctly identify its location we needed to test it in an environment with little interference and as controlled of an environment as possible. To achieve this, we needed to test
             outdoors in a open area with nothing nearby to cause signal reflection or have any other signal sources. If this worked, we needed to test indoors in a controlled environment to see if the algorithm was able to handle all the added
@@ -243,7 +246,7 @@
             forwards or backwards until it reached the assigned location. </p>
 
 
-          <h4> Execution </h4>
+      <li>    <h4> Execution </h4>  </li>
 
           <p> The validation of the RF Rover system consisted of an indoor trial inside one of the hallways of the Zachary building and an outdoor trial on a sidewalk near the Emerging Technologies Building. While the subsystem worked for both the
             indoor and outdoor trials with target position 5, only the outdoor scenario consistently arrived at its target position using any value. As seen in Figure 10, the MLA returned an array of a lot of different guesses at the rover’s current
@@ -251,7 +254,7 @@
             affect the accuracy of the MLA. In Figure 11, the rover started ahead of the target position and moved backwards. The actual positions of the rover are 8, 7, 6, then 5. In this case, the MLA successfully outputs a very accurate array of
             predicted position 8, 7, 6, 5 respectively. </p>
 
-          <h4> Conclusion </h4>
+    <li>      <h4> Conclusion </h4>   </li>
 
           <p> Our final demo was able to show that each subsystem was able to work collectively together in order to accomplish the end goal of correctly identifying its location using RSSI data. The RF subsystem was able to successfully collect and
             filter data and send it to the database subsystem, which was then able to be accessed and ran by the machine learning algorithm, which finally was able to send a command to the rover to either move forwards, backwards, or stay as it is in
@@ -261,13 +264,14 @@
               <p>Looking forward, we could further explore different environments (hallway with people walking around, etc) and even turn the system into a mobile phone application. Furthermore, we could look into solving the beamforming problem,
                 possibly by taking in huge amounts of data and running it through a machine learning algorithm.</p>
 
-                <iframe src="https://drive.google.com/file/d/1yfOKeWqtz-GdON3TzNWYgu42GiK-jtBC/preview" width="640" height="480"></iframe>
-                <iframe src="https://drive.google.com/file/d/1EYNihH9E8_kIqrpVpnS0OD6wNAgWgTj6/preview" width="640" height="480"></iframe>
+          <code>      <iframe src="https://drive.google.com/file/d/1yfOKeWqtz-GdON3TzNWYgu42GiK-jtBC/preview" width="640" height="480"></iframe>
+                <iframe src="https://drive.google.com/file/d/1EYNihH9E8_kIqrpVpnS0OD6wNAgWgTj6/preview" width="640" height="480"></iframe> </code>
 
 
 
 
-
+              </article>
+            </section>
 
 
 
