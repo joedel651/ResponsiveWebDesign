@@ -21,10 +21,9 @@ body {
   font-weight: bold;
 }
 
-h1 {
+header {
   color: black;
   margin: 10px;
-  text-align: center;
   font-size: 2em;
   font-weight: thin;
 }
@@ -55,7 +54,7 @@ h4 {
 
 
 #main-doc header {
-  text-align: left;
+  text-align: center;
   margin: 0px;
 }
 
