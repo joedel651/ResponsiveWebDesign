@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+
+<meta charset="UTF-8">
+  <link href="techcss.css" rel="stylesheet" type="text/css">
+<nav id="navbar">
+  <header>Machine Learning RF Rover</header>
+  <ul>
+    <li><a class="nav-link" href="#Vehicle_Subsystem_Report">Vehicle Subsystem Report</a></li>
+    <li>
+      <a class="nav-link" href="#RF_Subsystem_Report">RF Subsytem Report</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#Database_Subsystem_Report">Database Subsytem Report</a>
+    </li>
+    <li><a class="nav-link" href="#Machine_Learning_Algorithm_Subsystem_Report">Machine Learning
+        Subsystem Report</a></li>
+    <li><a class="nav-link" href="#System_Description_and_Development">System System Description and
+        Development</a></li>
+    <li>
+  </ul>
+</nav>
+
+<html>
+
+<main id="main-doc">
+  <section class="main-section" id="Vehicle_Subsystem_Report">
+    <h1>Vehicle Subsystem</h1>
+    <article>
+      <h2>Vehicle Subsystem Report Overview</h2>
+
+      <p>
+        The vehicle subsystem utilizes a RPI, Pixhawk module, and dual band antenna.
+        The RPI receives an array of predicted positions from the MLA, takes the median of
+        those values, and then communicates through a MAVProxy server to send movement commands
+        to the Pixhawk.
+      </p>
+      <h3 style="font-weight: bold;">Development Plan and Execution</h3>
+      <h4> Plan </h4>
+      <p>
+        The communication over the server between the RPI and the Pixhawk is done using
+        MAVLink protocol to address the different components and motors connected to the Pixhawk.
+        The program running on the RPI uses the information sent from the MLA to determine how the rover will
+        move relative to its current position. Since the Pixhawk cannot natively control a vehicle without a
+        GPS signal or open loop commands from an RC remote, we spoofed the pixhawk into thinking it was receiving
+        movement commands from an RC signal via a bitmask.
+      </p>
+      <h4> Execution </h4>
+
+      <p> Initially, this system was validated through testing on the Ardupilot SITL simulator. This simulator
+        substitutes the pixhawk microcontroller and vehicle together. The SITL simulation can receive commands
+        through MAVProxy on the RPI as shown in Figure 3. Before combining subsystems, an ultrasonic system was
+        set up to simulate two WiFi base stations. This ultrasonic system is connected directly to the RPI as shown
+        in Figure 1, and it simulates receiving commands from the MLA in the database. A python program will start from
+        the boot of the RPI that utilizes the SITL simulator and ultrasonic system. This python script enables the
+        vehicle to appropriately navigate forward or backward based on its position between the two ultrasonic sensors
+        relative to its programmed destination. The final validation of this subsystem was achieved by hard coding our
+        desired position and running the RF signals at a certain position through the MLA. The MLA would return a predicted
+        position and the rover would move based on whether the desired position was less than or greater than the target position.
+        When the rover arrived at the position all led lights would turn off.
+      </p>
+
+      <iframe src="https://drive.google.com/file/d/1u3ZwkBfu2k9tiIp2tU5eEeXzOgf1VP6O/preview" alt="Rover used for project" width="640" height="480"></iframe>
+      <iframe src="https://drive.google.com/file/d/1PUabUZCx4JA41EK6qsiU_nzpUi6S3qke/preview" width="640" height="480"></iframe>
+
+      <h4> Subsystem Conclusion </h4>
+
+      <p> Using the SITL simulator and allowing the ultrasonic system to simulate the WiFi base stations and MLA commands showed the vehicle subsystem is functioning properly.
+        However, we encountered trouble with the motors moving forward in a straight line since the the motors on the rover had no hall sensors or encoders to allow for
+        positional feedback. For future application, I recommend to write a program that capitalizes on the GPS module mounted on the rover to start navigation outdoors
+        and then move to indoor navigation. </p>
+
+    </article>
+  </section>
+
+  <section class="main-section" id="RF_Subsystem_Report">
+    <h1>RF Subsystem</h1>
+    <article>
+      <h2>RF Subsystem Report Overview</h2>
+
+
+      <p>The RF subsystem collects, filters, and sorts all useful data utilizing antennas,
+        Tshark, python script, and the RP3. The subsystem was tested to validate that it could
+        perform all the functions stated above in the ConOPs, ICD, and FSR.</p>
+
+      <h3>Plan</h3>
+
+      <p>For this subsystem, the main purpose was to be able to effectively collect RSSI signals
+        so that the rest of the system can function. In order to do this the first step was to be able
+        to get an antenna that would be able to collect 2.4 and 5.8 GHz signals. The second requirement
+        was that the antenna had to be able to have monitor mode enabled so that the antenna would be able to read signal strength and IP address data without actually connecting to the source. In order to validate these 2 requirements, I had to
+        first look up the specifications of the antennas, then interface it with our Kali Linux operating system in order to enable and test monitor mode. The two antennas that we ended up testing were the built in omnidirectional antenna built into
+        the RP3, and a custom patch antenna given to us by Dr. Huff.</p>
+      <p> The next step was testing which antenna was able to collect the data most effectively.
+        In order to do this, we first tested the omnidirectional antenna, the patch antenna in
+        different configurations indoors and outdoors, and compared the data. This was an important
+        step to ensure we would get the best results.</p>
+
+      <h3>Execution</h3>
+
+      <p>The ability to collect at least 5 data points was validated by running our python script
+        that ran using Tshark. The script was programmed to collect 5000 packets and sort and save
+        the IP address and RSSI signal. The program/antenna was able to collect these 5000 packets in just under 5 minutes. Figure 5/6 displays the graphed hallway position vs signal power of several wifi base stations. Figure 7/8 shows the data
+        collected inside and outside with the omnidirectional antenna. Figure 9 shows the data collected inside with the patch antenna. These results clearly indicate why we chose the omnidirectional antenna. It was able to show solid differentiated
+        data points, while the patch antenna often did not pick up signals.</p>
+
+      <p>The ability to access the RSSI signals and have monitor mode enabled was validated by
+        running the python script and observing the data. The three antennas tested were able to
+        enable monitor mode and collected the needed signals.</p>
+
+      <iframe src="https://drive.google.com/file/d/1Qk807JznDoThCSKYlqdgQjkuIwKLptE2/preview" alt="RF data" width="640" height="480"></iframe>
+      <iframe src="https://drive.google.com/file/d/1KJ_TGl3mBsR753vMIzaAnkMY8q-5M1yj/preview" alt="RF data 2" width="640" height="480"></iframe>
+
+
+      <h3> Subsystem Conclusion </h3>
+
+      <p>There were many challenges with this subsystem that were not foreseen at the start of the
+        project. The primary challenge was to be able to use an antenna to see RSSI data from the
+        various wifi base stations. We quickly learned that the RP3’s antenna does not have monitor
+        mode (a mode on the antenna that allows it to see data such as signal strength without connecting
+        to the network) and so we were not able to collect useful data. Eventually we installed an
+        operating system called Kali Linux that allowed us to install a patch and enable monitor mode.
+        Another challenge was being able to autonomously collecting data. At first it was a manual process
+        where we had to physically setup, start, save, and sort each time we collected data at a different point.
+        This was very tedious as we had to collect data from 33 different locations inside WEB. We eventually
+        managed to write a python script that was able to automatically do all the steps above with the push of
+        one button saving a significant amount of time in future data collections.</p>
+
+      <p>The RF subsystem was able to accomplish everything we said it would do in our midterm
+        report as well as more, as Dr. Huff and Dr. Chamberland continued giving more suggestions
+        and tasks to meet once we hit our goals. Any useful wifi data in a building can be collected,
+        the collection process is now automatic, and the subsystem is already merged with the database subsystem to almost instantly upload collected data to the SQL database to be accessed by the ML algorithm. Furthermore, we were able to make a
+        data driven decision to use the omnidirectional antenna instead of the patch antenna for the final design. Finally, after learning that the base stations in WEB are commercial grade and use beamforming, we decided to switch to our own base
+        station source (Feather Huzzah). Looking forward, I would continue testing the omnidirectional antenna
+        in even noisier environments to simulate a possible extreme case so that the final product
+        would be able to still deliver. Furthermore, I would look into antennas that are commonly
+        used in smartphones as a end use case could be to implement this algorithm into an app
+        for the visually impaired. </p>
+
+    </article>
+  </section>
+
+
+  <section class="main-section" id="Database_Subsystem_Report">
+    <h1>Database Subsytem Report</h1>
+    <article>
+      <h2>Database Subsystem Report Overview</h2>
+
+      <p>The Database Subsystem Report will explain the design process of the Database subsystem show the subsequent results. The Database Subsystem receives and manages the data collected by the RF Collection Subsystem. It then provides simple
+        access of the data to the Algorithm for processing. </p>
+
+      <h2>Development Plan and Execution</h2>
+
+      <h3>Plan</h3>
+
+      <p> In order to use the least amount of memory on the data collection subsystem, I planned to establish a cloud based SQL database. This cloud based database was determined to store collected data and provide access of data to algorithm in a
+        response time of less than one second via a internet connection. The data to be stored and accessed is the Address and RSSI information of collected Wifi Access Point network packets. </p>
+
+      <h3> Execution </h3>
+
+
+      <p>The data collected by rover is stored in a MySQL database hosted by the Google Cloud Platform. The data collected to be stored in database is transmitted by a Raspberry Pi 3 using a Proxy to give the quickest response time. The Raspberry Pi
+        transmits the data through an installed Google Cloud SQL proxy using a Python program, more specifically using the PyMySQL module. The Python program inserts data into a MySQL database table and includes credentials to connect to the MySQL
+        database.</p>
+
+      <p>The database gives accessibility of the data to the Algorithm via a separate Proxy, installed on computer hosting the Algorithm. Since Algorithm is written in Python, the same PyMySQL module is used for credentials and SQL data extraction.
+      </p>
+
+
+      <p> The database gives accessibility of the data to the Algorithm via a separate Proxy, installed on computer hosting the Algorithm. Since Algorithm is written in Python, the same PyMySQL module is used for credentials and SQL data extraction.
+      </p>
+
+      <iframe src="https://drive.google.com/file/d/12Cg167JgfL5JtwxrOU7VrGm8OpX5Pd-p/preview" alt="database figure 1" width="640" height="480"></iframe>
+
+      <h3> Conclusion </h3>
+
+      <p> The Database Subsystem successfully integrated with the RF and Algorithm Subsystem, storing collected data and making data accessible through a cloud based database. The average total response time of 50-55 ms was far quicker than required
+        response time. The key decision made was to access MySQL database using a proxy and a local variable credential key that shorted response time by 400% versus the previous method of authorizing an IP address. I would highly recommend using the
+        Google API Cloud SQL service for anyone going forward with this project, both for research and commercial use. The ease of accessibility and authentication process makes data storage related to this project undemanding. </p>
+
+    </article>
+  </section>
+
+  <section class="main-section" id="Machine_Learning_Algorithm_Subsystem_Report">
+    <h1>Machine Learning Subsystem</h1>
+    <article>
+      <h2>Machine Learning Algorithm Subsytem Overview</h2>
+
+      <p> The purpose of the machine learning subsystem is accurately predict which relative position the rover is currently on by comparing the collected RSSI signal strength data of all the selected WIFI base stations in the area to a training
+        dataset stored on the pi in the form of a CSV. This operation is critical for giving the rover the ability to predict which direction to go and if it has reached its destination. </p>
+
+      <h2> Development and Execution </h2>
+
+      <h3> Plan </h3>
+
+      <p> A KNN algorithm was used to determine the pattern of the relative position and RSSI data. A categorical algorithm as opposed to linear regression because data was only collected at 10 linear points in an area. In this project we compared
+        the data points to the 4 nearest neighbors from the training set.</p>
+
+      <h3> Execution </h3>
+
+      <p> This system was tested by placing four wifi base stations in an area to send signals to the rover. Upon importing the data the algorithm would assign it to be the testing set and compare it to a predefined training set that was stored on
+        the RPI. This CSV was compared to the training set line by line to output the median predicted position so that the rover could make decisions based on this reference. A series of test were conducted prior to the final design to get an
+        accuracy high enough to validate the design requirements, because the algorithm can not compute accuracy without having position defined in the testing. Upon running and compiling the code a testing error of 13% was recorded for the K nearest
+        neighbors approach, achieving the specified engineering specification.</p>
+
+      <iframe src="https://drive.google.com/file/d/1n346VF3w0xN3VoUotJxHwZ7bUNK1uPV1/preview" alt="ML1" width="640" height="480"></iframe>
+      <iframe src="https://drive.google.com/file/d/1OnzzJ96WN-iDQ--1ThHxb48oL-EF5cOk/preview" alt="ML2" width="640" height="480"></iframe>
+      <iframe src="https://drive.google.com/file/d/1zxjqh6T8vcJAbNy_dgmNX6iv9HUWrjwk/preview" alt="ML3" width="640" height="480"></iframe>
+
+      <h3>Conclusion </h3>
+
+      <p> Testing and refining has been completed. The KNN algorithm has been placed inside a user defined algorithm that will import a predefined training set and then take in each relative position set as a testing set to compare with the training
+        set. When the algorithm outputs a predicted position that is not equal to the final position the rover will move forward or backward and recursively call the algorithm again until it reaches the final position. </p>
+
+
+
+    </article>
+  </section>
+
+  <section class="main-section" id="System_Description_and_Development">
+    <h1>System Description and Development </h1>
+    <article>
+
+      <h2> RF Rover subsystem report </h2>
+
+      <h3> Overview / Abstract </h3>
+
+          <p> The RF rover will autonomously collect 2.4GHz/5GHz signals from Wifi Access Points as it moves along a straight path. The Rover will autonomously collect the signals network packets and determine the Address of the Wifi Access Point
+            that transmitted the signal, as well as the RSSI of the signal. The collected data is then sent to a database to be evaluated by a Machine Learning Algorithm that will determine the Rover’s location based on previous collected training
+            sets. The algorithm will communicate with the Rover it’s current location and based on this, the rover determines whether it has arrived at desired location and stop or keep moving to the desired location. The four subsystems that will
+            work in unison to accomplish this is the Rover Vehicle Subsystem, the RF Collection Subsystem, the Database Subsystem, and the Machine Learning Algorithm Subsystem. </p>
+
+
+          <h3> Development Plan and Execution </h3>
+
+          <h4> Plan </h4>
+
+          <p> In order to test the entire system and see if it can correctly identify its location we needed to test it in an environment with little interference and as controlled of an environment as possible. To achieve this, we needed to test
+            outdoors in a open area with nothing nearby to cause signal reflection or have any other signal sources. If this worked, we needed to test indoors in a controlled environment to see if the algorithm was able to handle all the added
+            interference from bouncing signals and other RF signals. The way each environment was setup included four Feather Huzzah boards spaced 8 ft apart in a line outputting a 2.4 GHz signal. Then the rover was set up a to run parallel to the
+            boards and collect and stop on this parallel line. When the program started, the antenna would collect and filter the RSSI signals from each Feather Huzzah board, store it, move forwards 6 ft and continue this process ten times. The rover
+            would then go back to the beginning and begin collecting data again. Using this data, it would compare it to the original data taken in the first collection set in order to identify which point it is at. From here it would either move
+            forwards or backwards until it reached the assigned location. </p>
+
+
+          <h4> Execution </h4>
+
+          <p> The validation of the RF Rover system consisted of an indoor trial inside one of the hallways of the Zachary building and an outdoor trial on a sidewalk near the Emerging Technologies Building. While the subsystem worked for both the
+            indoor and outdoor trials with target position 5, only the outdoor scenario consistently arrived at its target position using any value. As seen in Figure 10, the MLA returned an array of a lot of different guesses at the rover’s current
+            position. The first 3 positions are supposed to be position 2, 3, 4 respectively but all are predicted to be position 3 from the MLA. This indoor trial shows how RF interference from other base stations and signals bouncing around can
+            affect the accuracy of the MLA. In Figure 11, the rover started ahead of the target position and moved backwards. The actual positions of the rover are 8, 7, 6, then 5. In this case, the MLA successfully outputs a very accurate array of
+            predicted position 8, 7, 6, 5 respectively. </p>
+
+          <h4> Conclusion </h4>
+
+          <p> Our final demo was able to show that each subsystem was able to work collectively together in order to accomplish the end goal of correctly identifying its location using RSSI data. The RF subsystem was able to successfully collect and
+            filter data and send it to the database subsystem, which was then able to be accessed and ran by the machine learning algorithm, which finally was able to send a command to the rover to either move forwards, backwards, or stay as it is in
+            the correct location. We were able to prove that an RF wifi system is able to correctly identify its location in low noise environments (outdoors), and also inside noisy environments (building hallway) with a non beamforming source <p>
+
+
+              <p>Looking forward, we could further explore different environments (hallway with people walking around, etc) and even turn the system into a mobile phone application. Furthermore, we could look into solving the beamforming problem,
+                possibly by taking in huge amounts of data and running it through a machine learning algorithm.</p>
+
+                <iframe src="https://drive.google.com/file/d/1yfOKeWqtz-GdON3TzNWYgu42GiK-jtBC/preview" width="640" height="480"></iframe>
+                <iframe src="https://drive.google.com/file/d/1EYNihH9E8_kIqrpVpnS0OD6wNAgWgTj6/preview" width="640" height="480"></iframe>
+
+
+
+
+
+
+
+
+</html>
