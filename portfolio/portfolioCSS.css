@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/*Define variables just in case they need to be reused*/
+:root {
+  --header: linear-gradient(90deg, rgb(158, 112, 180), rgb(102, 49, 131), rgb(52, 8, 87));
+  --main-white: #f0f0f0;
+  --main-purple: rgb(52, 8, 87);
+  --main-blue: rgb(73, 74, 145);
+  --main-black: rgb(0, 0, 0);
+  --main-gray: rgb(65, 66, 69);
+
+}
+
+
+
+body {
+  background-color: #eee;
+  font-family: "Arial", Times, serif;
+
+}
+
+/*Header Styling*/
+.nav{
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--header);
+}
+
+.nav-list {
+  display: flex;
+  margin-right: 4rem;
+}
+
+.nav-list a {
+  display: block;
+  font-size: 2rem;
+  padding: 1rem;
+
+}
+
+.nav-list a:hover {
+  background: rgb(27, 16, 228);
+}
+/*Get rid of the dots*/
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(223, 242, 238);
+}
+
+/* Introduction*/
+h1 {
+  font-size: 4rem;
+  color: var(--main-white);
+}
+
+.welcome-section {
+  display: flex; /*allows items to be moved*/
+  flex-direction: column; /*Items were a row by default*/
+  align-items: center; /* Move the content in the container to the horizontal
+  center*/
+  justify-content: center; /*Move the content to the center of the conntainer*/
+  width: 100%;
+  height: 100vh; /*view port height 100 = 100%*/
+  background-color:  var(--main-gray);
+
+
+}
+/*free code camp has p inherit the properties of welcome-section
+but you do not have to and it is not taught in the lessons*/
+p{
+color: var(--main-purple);
+font-size: 2rem;
+font-style: italic;
+text-decoration: none;
+}
+
+.projects-section-header {
+  max-width: 640px;
+  margin: 0 auto 6rem auto;
+  border-bottom: 0.2rem solid var(--main-white);
+}
+
+h2 {
+  font-family: "Arial", Times, serif;
+  font-weight: 700;
+  text-align: center;
+  font-size: 2.4rem;
+  padding-top: 10px;
+/*  text-decoration: underline;*/
+  color: var(--main-white);
+}
+
+
+a {
+  text-decoration: none;
+  color: var(--main-white);
+
+}
+
+/*This was the only way i could get the images to look the same size*/
+img {
+  width: 300px; /* You can set the dimensions to whatever you want */
+  height: 300px;
+  object-fit: cover;
+
+}
+
+#thumbnail{
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+
+  #projects{
+
+    background-color: var(--main-blue);
+    margin-bottom: 90px;
+
+  }
+
+  .project-image{
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border-radius: 25px;
+  }
+
+  .project-title{
+    color: var(--main-white);
+
+
+  }
+
+
+  .project-title:hover{
+    color: var(--main-black);
+
+  }
+
+
+
+
+
+  .contact-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+  padding: 0 2rem;
+  /*Had to edit margin to reduce distance between
+  contact section and project section*/
+  margin-top: -97px;
+  background: var(--main-gray);
+}
+
+.contact-section-header{
+  font-size: 6rem;
+}
+
+
+/*change size for h2 within contact section*/
+.contact-section-header > h2 {
+  font-size: 6rem;
+
+
+.
