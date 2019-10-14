@@ -11,6 +11,7 @@
   --main-black: rgb(0, 0, 0);
   --main-gray: rgb(65, 66, 69);
 
+
 }
 
 
@@ -149,6 +150,9 @@ img {
 
 
 
+
+
+
   .contact-section {
   display: flex;
   flex-direction: column;
@@ -164,6 +168,37 @@ img {
   background: var(--main-gray);
 }
 
+/*Icons*/
+.btn {
+  display: inline-block;
+  padding: 1rem 4rem;
+  border-radius: 2px;
+  transform: scale(2);
+
+
+}
+
+.btn-show-all {
+  font-size: 2rem;
+  background: var(--main-gray);
+  transition: background 0.3s ease-out;
+}
+
+.btn-show-all:hover {
+  background: var(--main-red);
+}
+
+.btn-show-all:hover > i {
+  transform: translateX(2px);
+}
+
+.btn-show-all > i {
+  margin-left: 10px;
+  transform: translateX(0);
+  transition: transform 0.3s ease-out;
+}
+
+
 .contact-section-header{
   font-size: 6rem;
 }
@@ -173,5 +208,20 @@ img {
 .contact-section-header > h2 {
   font-size: 6rem;
 
+}
 
-.
+/* Footer */
+
+footer {
+  font-weight: 300;
+  display: flex;
+  justify-content: flex-start;
+  padding: 2rem;
+  background: var(--main-gray);
+  border-top: 4px solid var(--main-purple);
+}
+
+footer  > p {
+  color: var(--main-white);
+  font-size: 1.4rem;
+}
